@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/sign.css'
 import { Link } from "react-router-dom";
+import { auth, signInWithEmailAndPassword } from "../DB/Firebase";
 import Navbar from './Navbar';
 
 class Login extends React.Component {
