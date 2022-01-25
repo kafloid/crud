@@ -4,7 +4,7 @@ import TodoFields from '../common/TodoFields';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../DB/Firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { query, collection, doc, getDocs, getDoc, where, snapshotEqual, setDoc } from "firebase/firestore";
 import { withFormik } from 'formik';
 import * as Yup from "yup";
 
@@ -20,12 +20,13 @@ function Todo() {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const navigate = useNavigate();
+
     const fetchUserName = async () => {
         try {
             const q = query(collection(db, "users"), where("uid", "==", user?.uid));
             const doc = await getDocs(q);
             const data = doc.docs[0].data();
-            setName(data.name);
+            setTodos(data.todo);
         } catch (err) {
             console.error(err);
             alert("An error occured while fetching user data");
@@ -37,6 +38,17 @@ function Todo() {
         if (!user) return navigate("/login");
         fetchUserName();
     }, [user, loading]);
+
+    async function buscarDocumentOCrearDocument() {
+        try {
+            const docuRef = query(collection(db, "users"), where("uid", "==", user?.uid));
+            const consulta = await getDoc(docuRef);
+            const infoDocu = consulta.data();
+            return infoDocu.todo;
+        } catch (error) {
+            alert("user data is corrupted");
+        }
+    }
 
     const addTodo = (event) => {
         event.preventDefault();
@@ -77,7 +89,7 @@ function Todo() {
                                         </div>
 
                                         <div className="col-12">
-                                            <button type="submit" className="btn btn-warning">Get tasks</button>
+                                            <button type="submit" className="btn btn-warning" onClick={() => window.location.reload(false)}>Get tasks</button>
                                         </div>
                                     </form>
 
@@ -98,15 +110,7 @@ function Todo() {
                                                     task={todo}
                                                     status="in progress"
                                                 />
-                                            })
-                                            /* {fields.map((task, index) => {
-                                                return <TodoFields {...task}
-                                                    key={index}
-                                                // number={this.props.counter}
-                                                // task={this.props.task}
-                                                // status={this.props.status}
-                                                />
-                                            })} */}
+                                            })}
                                         </tbody>
                                     </table>
 

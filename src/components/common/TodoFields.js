@@ -8,7 +8,7 @@ class TodoFields extends React.Component {
                 <td>{this.props.task}</td>
                 <td>{this.props.status}</td>
                 <td>
-                    <button type="submit" className="btn btn-danger">delete</button>
+                    <button type="submit" className="btn btn-danger" >delete</button>
                     <button type="submit" className="btn btn-success ms-1">Finish</button>
                 </td>
             </tr>

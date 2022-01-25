@@ -22,7 +22,7 @@ class Home extends React.Component {
                     </div>
                 </header>
                 <About />
-                <Todo />
+                {/*<Todo />*/}
             </div>
         )
     }

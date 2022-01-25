@@ -34,7 +34,7 @@ const logInWithEmailAndPassword = async (email, password) => {
         alert(err.message);
     }
 };
-const registerWithEmailAndPassword = async (name, email, password) => {
+const registerWithEmailAndPassword = async (name, email, password, todo) => {
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
@@ -43,6 +43,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
             name,
             authProvider: "local",
             email,
+            todo,
         });
     } catch (err) {
         console.error(err);
