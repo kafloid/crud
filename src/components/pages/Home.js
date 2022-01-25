@@ -3,7 +3,7 @@ import Navbar from '../common/Navbar';
 import { Link } from "react-router-dom";
 import '../css/styles.css'
 import About from './About';
-import Todo from '../common/Todo';
+import Todo from './Todo';
 
 class Home extends React.Component {
     render() {

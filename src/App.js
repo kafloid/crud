@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/common/Login';
 import SignUp from './components/common/Register';
 import Home from './components/pages/Home';
-import Todo from './components/common/Todo';
+import Todo from './components/pages/Todo';
 import Reset from './components/common/Reset';
 import Dashboard from './components/pages/Dashboard';
 
@@ -20,6 +20,7 @@ function App() {
       <Route path="/reset" element={<Reset />}></Route>
       <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
+
 
   );
 }
